@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :merchant do
-    name { "Monty's Mercantile" }
+    name { "Montys Mercantile" }
   end
 end
