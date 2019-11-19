@@ -7,7 +7,9 @@ desc "Import data from CSV file"
 
     CSV.foreach(merchant_file, :headers => true) do |row|
       Merchant.create!(
-        :name => row[1]
+        :name => row[1],
+        :created_at => row[2],
+        :updated_at => row[3]
       )
     end
 
@@ -16,7 +18,9 @@ desc "Import data from CSV file"
     CSV.foreach(customer_file, :headers => true) do |row|
       Customer.create!(
         :first_name => row[1],
-        :last_name => row[2]
+        :last_name => row[2],
+        :created_at => row[3],
+        :updated_at => row[4]
       )
     end
 
@@ -27,7 +31,9 @@ desc "Import data from CSV file"
         :name => row[1],
         :description => row[2],
         :unit_price => row[3].to_f / 100, #converts to dollars from cents
-        :merchant_id => row[4]
+        :merchant_id => row[4],
+        :created_at => row[5],
+        :updated_at => row[6]
       )
     end
 
@@ -37,7 +43,9 @@ desc "Import data from CSV file"
       Invoice.create!(
         :customer_id => row[1],
         :merchant_id => row[2],
-        :status => row[3]
+        :status => row[3],
+        :created_at => row[4],
+        :updated_at => row[5]
       )
     end
 
@@ -48,7 +56,9 @@ desc "Import data from CSV file"
         :item_id => row[1],
         :invoice_id => row[2],
         :quantity => row[3],
-        :unit_price => row[4].to_f / 100
+        :unit_price => row[4].to_f / 100,
+        :created_at => row[5],
+        :updated_at => row[6]
       )
     end
 
@@ -59,7 +69,9 @@ desc "Import data from CSV file"
         :invoice_id => row[1],
         :credit_card_number => row[2],
         :credit_card_expiration_date => row[3],
-        :result => row[4]
+        :result => row[4],
+        :created_at => row[5],
+        :updated_at => row[6]
       )
     end
 
