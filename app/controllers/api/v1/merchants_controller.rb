@@ -30,4 +30,12 @@ class Api::V1::MerchantsController < ApplicationController
     render json: serialized_merchant
   end
 
+  def most_revenue
+    merchant = Merchant.order('')
+    #
+    # Merchant.order('item * price').limit(params)
+    serialized_merchant = MerchantSerializer.new(merchant)
+    render  json: serialized_merchant
+  end
+
 end
