@@ -69,7 +69,7 @@ describe "Merchants API" do
   end
 
   it "finds all merchants by id" do
-    merchants = create_list(:merchant, 5)
+    create_list(:merchant, 5)
     merchant = Merchant.last
 
     get "/api/v1/merchants/find_all?id=#{merchant.id}"
@@ -81,7 +81,7 @@ describe "Merchants API" do
   end
 
   it "finds all merchants by id" do
-    merchants = create_list(:merchant, 5)
+    create_list(:merchant, 5)
     merchant = Merchant.last
 
     get "/api/v1/merchants/find_all?id=#{merchant.id}"
@@ -93,7 +93,7 @@ describe "Merchants API" do
   end
 
   it "finds all merchants by name" do
-    merchants = create_list(:merchant, 5)
+    create_list(:merchant, 5)
     merchant = Merchant.last
 
     get "/api/v1/merchants/find_all?name=#{merchant.name}"
@@ -105,7 +105,7 @@ describe "Merchants API" do
   end
 
   it "finds all merchants by created_at" do
-    merchants = create_list(:merchant, 5, created_at: "2012-03-27 14:53:59 UTC")
+    create_list(:merchant, 5, created_at: "2012-03-27 14:53:59 UTC")
     merchant = Merchant.last
 
     get "/api/v1/merchants/find_all?created_at=#{merchant.created_at}"
@@ -117,7 +117,7 @@ describe "Merchants API" do
   end
 
   it "finds all merchants by updated_at" do
-    merchants = create_list(:merchant, 5, updated_at: "2012-03-27 14:53:59 UTC")
+    create_list(:merchant, 5, updated_at: "2012-03-27 14:53:59 UTC")
     merchant = Merchant.last
 
     get "/api/v1/merchants/find_all?updated_at=#{merchant.updated_at}"
@@ -129,7 +129,7 @@ describe "Merchants API" do
   end
 
   it "finds a random merchant" do
-    merchants = create_list(:merchant, 5)
+    create_list(:merchant, 5)
 
     get "/api/v1/merchants/random"
 
