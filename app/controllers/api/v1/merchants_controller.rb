@@ -25,17 +25,10 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def random
-    merchant = Merchant.find(rand(1..Merchant.count))
+    random_id = Merchant.pluck(:id).sample(1)
+    merchant = Merchant.find(random_id)
     serialized_merchant = MerchantSerializer.new(merchant)
     render json: serialized_merchant
-  end
-
-  def most_revenue
-    merchant = Merchant.order('')
-    #
-    # Merchant.order('item * price').limit(params)
-    serialized_merchant = MerchantSerializer.new(merchant)
-    render  json: serialized_merchant
   end
 
 end
