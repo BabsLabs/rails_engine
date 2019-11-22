@@ -80,18 +80,6 @@ describe "Merchants API Endpoints" do
     expect(merchants_find_all_id_check.values).to_not eq({"data"=>nil})
   end
 
-  it "finds all merchants by id" do
-    create_list(:merchant, 5)
-    merchant = Merchant.last
-
-    get "/api/v1/merchants/find_all?id=#{merchant.id}"
-
-    expect(response).to be_successful
-
-    merchants_find_all_id_check = JSON.parse(response.body)
-    expect(merchants_find_all_id_check.values).to_not eq({"data"=>nil})
-  end
-
   it "finds all merchants by name" do
     create_list(:merchant, 5)
     merchant = Merchant.last
