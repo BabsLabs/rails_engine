@@ -194,5 +194,4 @@ describe "Items Api" do
     items_check = JSON.parse(response.body)
     expect(items_check).to_not eq({"data"=>nil})
   end
-
 end

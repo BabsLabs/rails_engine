@@ -34,5 +34,4 @@ describe "Merchants Business Intelligence" do
     merchants_revenue_check = JSON.parse(response.body)
     expect(merchants_revenue_check).to_not eq({"data"=>nil})
   end
-
 end
