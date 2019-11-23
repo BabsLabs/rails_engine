@@ -26,6 +26,12 @@ Rails.application.routes.draw do
 
       resources :items, only: [:index, :show]
 
+      #customers
+      namespace :customers do
+      end
+
+      resources :customers, only: [:index, :show]
+
     end
   end
 end
