@@ -4,7 +4,7 @@ describe "Items API Random Endpont" do
   it "can find a random item" do
     merchant = create(:merchant)
     create_list(:item, 5, updated_at: "2012-03-27T14:54:05.000Z", merchant_id: merchant.id)
-    items_ids = Item.all.pluck(:id)
+    items_ids = Item.pluck(:id)
 
     get "/api/v1/items/random"
 
