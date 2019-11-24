@@ -54,9 +54,9 @@ describe "Invoices API Relationship Endpoints" do
 
     invoice_transactions_check = JSON.parse(response.body)
     expect(invoice_transactions_check).to_not eq({"data"=>nil})
-    # expect(invoice_transactions_check['data']['relationships']['items']['data'].count).to eq(10)
-    # expect(invoice_transactions_check['data']['type']).to eq('invoice_items')
-    # expect(invoice_transactions_check['data']['relationships']['items']['data'].first['id']).to eq(item.id.to_s)
-    # expect(invoice_transactions_check['data']['relationships']['items']['data'].first['type']).to eq('invoice_item')
+    expect(invoice_transactions_check['data']['relationships']['items']['data'].count).to eq(10)
+    expect(invoice_transactions_check['data']['type']).to eq('invoice_items')
+    expect(invoice_transactions_check['data']['relationships']['items']['data'].first['id']).to eq(item.id.to_s)
+    expect(invoice_transactions_check['data']['relationships']['items']['data'].first['type']).to eq('item')
   end
 end
