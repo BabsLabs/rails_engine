@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       resources :customers, only: [:index, :show]
 
       #invoices
-      resources :invoices, only: [:index]
+      resources :invoices, only: [:index, :show]
     end
   end
 end
