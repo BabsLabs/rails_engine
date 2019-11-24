@@ -36,4 +36,22 @@ describe "Invoices API Endpoints" do
     expect(invoices_check['data'].values).not_to include(invoice_2.id.to_s)
   end
 
+  it "can find a single invoice by id" do
+    merchant = create(:merchant)
+    customer = create(:customer)
+    create_list(:invoice, 10, merchant_id: merchant.id, customer_id: customer.id)
+    invoice_1 = Invoice.first
+    invoice_2 = Invoice.last
+
+    get "/api/v1/invoices/find?id=#{invoice_1.id}"
+
+    expect(response).to be_successful
+
+    invoices_check = JSON.parse(response.body)
+    expect(invoices_check).to_not eq({"data"=>nil})
+    expect(invoices_check['data']['type']).to eq('invoice')
+    expect(invoices_check['data']['id']).to eq(invoice_1.id.to_s)
+    expect(invoices_check['data'].values).not_to include(invoice_2.id.to_s)
+  end
+
 end
