@@ -33,12 +33,12 @@ describe "Invoices API Relationship Endpoints" do
 
     expect(response).to be_successful
 
-    invoice_transactions_check = JSON.parse(response.body)
-    expect(invoice_transactions_check).to_not eq({"data"=>nil})
-    expect(invoice_transactions_check['data']['relationships']['invoice_items']['data'].count).to eq(InvoiceItem.count)
-    expect(invoice_transactions_check['data']['type']).to eq('invoice_invoice_items')
-    expect(invoice_transactions_check['data']['relationships']['invoice_items']['data'].first['id']).to eq(invoice_item.id.to_s)
-    expect(invoice_transactions_check['data']['relationships']['invoice_items']['data'].first['type']).to eq('invoice_item')
+    invoice_invoice_items_check = JSON.parse(response.body)
+    expect(invoice_invoice_items_check).to_not eq({"data"=>nil})
+    expect(invoice_invoice_items_check['data']['relationships']['invoice_items']['data'].count).to eq(InvoiceItem.count)
+    expect(invoice_invoice_items_check['data']['type']).to eq('invoice_invoice_items')
+    expect(invoice_invoice_items_check['data']['relationships']['invoice_items']['data'].first['id']).to eq(invoice_item.id.to_s)
+    expect(invoice_invoice_items_check['data']['relationships']['invoice_items']['data'].first['type']).to eq('invoice_item')
   end
 
   it "returns a collection of associated items" do
@@ -52,11 +52,28 @@ describe "Invoices API Relationship Endpoints" do
 
     expect(response).to be_successful
 
-    invoice_transactions_check = JSON.parse(response.body)
-    expect(invoice_transactions_check).to_not eq({"data"=>nil})
-    expect(invoice_transactions_check['data']['relationships']['items']['data'].count).to eq(10)
-    expect(invoice_transactions_check['data']['type']).to eq('invoice_items')
-    expect(invoice_transactions_check['data']['relationships']['items']['data'].first['id']).to eq(item.id.to_s)
-    expect(invoice_transactions_check['data']['relationships']['items']['data'].first['type']).to eq('item')
+    invoice_items_check = JSON.parse(response.body)
+    expect(invoice_items_check).to_not eq({"data"=>nil})
+    expect(invoice_items_check['data']['relationships']['items']['data'].count).to eq(10)
+    expect(invoice_items_check['data']['type']).to eq('invoice_items')
+    expect(invoice_items_check['data']['relationships']['items']['data'].first['id']).to eq(item.id.to_s)
+    expect(invoice_items_check['data']['relationships']['items']['data'].first['type']).to eq('item')
+  end
+
+  it "returns a collection of associated customers" do
+    merchant = create(:merchant)
+    customer = create(:customer)
+    invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+
+    get "/api/v1/invoices/#{invoice.id}/customer"
+
+    expect(response).to be_successful
+
+    invoice_customers_check = JSON.parse(response.body)
+    expect(invoice_customers_check).to_not eq({"data"=>nil})
+    expect(invoice_customers_check['data']['relationships'].count).to eq(1)
+    expect(invoice_customers_check['data']['type']).to eq('invoice_customers')
+    expect(invoice_customers_check['data']['relationships']['customer']['data']['id']).to eq(customer.id.to_s)
+    expect(invoice_customers_check['data']['relationships']['customer']['data']['type']).to eq('customer')
   end
 end
