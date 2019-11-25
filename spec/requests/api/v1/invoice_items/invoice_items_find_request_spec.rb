@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Invoice Items API Find Endpoints" do
+describe "Invoice_items API Find Endpoints" do
   it "can find a single invoice_item by id" do
     merchant = create(:merchant)
     item_1 = create(:item, merchant_id: merchant.id)
