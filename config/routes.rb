@@ -53,9 +53,10 @@ Rails.application.routes.draw do
 
       #invoice_items
       namespace :invoice_items do
+        get '/find', to: 'find#show'
       end
 
-      resources :invoice_items, only: [:index]
+      resources :invoice_items, only: [:index, :show]
 
     end
   end
