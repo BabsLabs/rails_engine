@@ -17,7 +17,7 @@ describe "Items Api Endponts" do
     expect(items_ids.include?(items_check['data'].first['attributes']['id'])).to be_truthy
   end
 
-  it "send a single item" do
+  it "sends a single item" do
     merchant_1 = create(:merchant)
     create_list(:item, 5, merchant_id: merchant_1.id)
     item_1 = Item.first
