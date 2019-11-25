@@ -50,6 +50,13 @@ Rails.application.routes.draw do
       end
 
       resources :invoices, only: [:index, :show]
+
+      #invoice_items
+      namespace :invoice_items do
+      end
+
+      resources :invoice_items, only: [:index]
+
     end
   end
 end
