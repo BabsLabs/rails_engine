@@ -64,7 +64,9 @@ Rails.application.routes.draw do
 
       #transactions
       namespace :transactions do
-
+        get '/find', to: 'find#show'
+        get '/find_all', to: 'find#index'
+        get '/random', to: 'random#show'
       end
 
       resources :transactions, only: [:index, :show]
