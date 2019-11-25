@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe "Merchants Business Intelligence" do
   it "returns the top x merchants ranked by total revenue" do
+    skip
     merchant_1 = create(:merchant, name: 'Winner Merchant')
     item_1 = create(:item, merchant_id: merchant_1.id)
     customer = create(:customer)
