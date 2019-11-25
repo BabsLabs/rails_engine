@@ -60,7 +60,7 @@ describe "Invoices API Relationship Endpoints" do
     expect(invoice_items_check['data']['relationships']['items']['data'].first['type']).to eq('item')
   end
 
-  it "returns a collection of associated customers" do
+  it "returns a the associated customer" do
     merchant = create(:merchant)
     customer = create(:customer)
     invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
@@ -72,8 +72,25 @@ describe "Invoices API Relationship Endpoints" do
     invoice_customers_check = JSON.parse(response.body)
     expect(invoice_customers_check).to_not eq({"data"=>nil})
     expect(invoice_customers_check['data']['relationships'].count).to eq(1)
-    expect(invoice_customers_check['data']['type']).to eq('invoice_customers')
+    expect(invoice_customers_check['data']['type']).to eq('invoice_customer')
     expect(invoice_customers_check['data']['relationships']['customer']['data']['id']).to eq(customer.id.to_s)
     expect(invoice_customers_check['data']['relationships']['customer']['data']['type']).to eq('customer')
+  end
+
+  it "returns a the associated merchant" do
+    merchant = create(:merchant)
+    customer = create(:customer)
+    invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
+
+    get "/api/v1/invoices/#{invoice.id}/merchant"
+
+    expect(response).to be_successful
+
+    invoice_customers_check = JSON.parse(response.body)
+    expect(invoice_customers_check).to_not eq({"data"=>nil})
+    expect(invoice_customers_check['data']['relationships'].count).to eq(1)
+    expect(invoice_customers_check['data']['type']).to eq('invoice_merchant')
+    expect(invoice_customers_check['data']['relationships']['merchant']['data']['id']).to eq(merchant.id.to_s)
+    expect(invoice_customers_check['data']['relationships']['merchant']['data']['type']).to eq('merchant')
   end
 end
