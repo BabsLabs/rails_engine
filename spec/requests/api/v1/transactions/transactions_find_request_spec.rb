@@ -55,25 +55,6 @@ describe "Transactions Api Find Endponts" do
     expect(transactions_check['data']['type']).to eq('transaction')
   end
 
-  it "finds a transaction by credit_card_expiration_date" do
-    merchant = create(:merchant)
-    customer = create(:customer)
-    invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    invoice_2 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    transaction = create(:transaction, invoice_id: invoice.id, credit_card_expiration_date: '5555555555555555')
-    transaction_2 = create(:transaction, invoice_id: invoice_2.id, credit_card_expiration_date: '4431483765884573')
-
-    get "/api/v1/transactions/find?credit_card_expiration_date=#{transaction.credit_card_expiration_date}"
-
-    expect(response).to be_successful
-
-    transactions_check = JSON.parse(response.body)
-    expect(transactions_check).to_not eq({"data"=>nil})
-    expect(transactions_check['data']['attributes']['credit_card_expiration_date']).to eq(transaction.credit_card_expiration_date)
-    expect(transactions_check['data']['type']).to eq('transaction')
-    expect(transactions_check['data']['attributes']['credit_card_expiration_date']).to_not eq(transaction_2.credit_card_expiration_date)
-  end
-
   it "finds a transaction by created_at" do
     merchant = create(:merchant)
     customer = create(:customer)
@@ -154,23 +135,6 @@ describe "Transactions Api Find Endponts" do
     transactions_check = JSON.parse(response.body)
     expect(transactions_check).to_not eq({"data"=>[]})
     expect(transactions_check['data'].first['attributes']['credit_card_number']).to eq(transaction.credit_card_number)
-    expect(transactions_check['data'].first['type']).to eq('transaction')
-  end
-
-  it "finds all transactions by credit_card_expiration_date" do
-    merchant = create(:merchant)
-    customer = create(:customer)
-    invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    create_list(:transaction, 7, invoice_id: invoice.id)
-    transaction = Transaction.first
-
-    get "/api/v1/transactions/find_all?credit_card_expiration_date=#{transaction.credit_card_expiration_date}"
-
-    expect(response).to be_successful
-
-    transactions_check = JSON.parse(response.body)
-    expect(transactions_check).to_not eq({"data"=>[]})
-    expect(transactions_check['data'].first['attributes']['credit_card_expiration_date']).to eq(transaction.credit_card_expiration_date)
     expect(transactions_check['data'].first['type']).to eq('transaction')
   end
 
