@@ -12,8 +12,8 @@ describe "Customer Relationship API Endpoints" do
 
     customer_check = JSON.parse(response.body)
     expect(customer_check).to_not eq({"data"=>nil})
-    expect(customer_check['data']['type']).to eq('customer_invoices')
-    expect(customer_check['data']['relationships']['invoices']['data'].count).to eq(10)
+    expect(customer_check['data'][0]['type']).to eq('invoice')
+    expect(customer_check['data'].count).to eq(10)
   end
 
   it "returns a collection of assocsiated transactions" do
@@ -26,8 +26,8 @@ describe "Customer Relationship API Endpoints" do
 
     customer_check = JSON.parse(response.body)
     expect(customer_check).to_not eq({"data"=>nil})
-    expect(customer_check['data']['type']).to eq('customer_transactions')
-    expect(customer_check['data']['relationships']['transactions']['data'].count).to eq(25)
+    expect(customer_check['data'][0]['type']).to eq('transaction')
+    expect(customer_check['data'].count).to eq(25)
   end
 
 end

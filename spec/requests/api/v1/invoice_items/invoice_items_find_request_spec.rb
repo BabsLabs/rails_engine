@@ -91,15 +91,15 @@ describe "Invoice_items API Find Endpoints" do
     invoice_item_1 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice.id, quantity: 10, unit_price: 2.50)
     invoice_item_2 = create(:invoice_item, item_id: item_2.id, invoice_id: invoice.id, quantity: 5, unit_price: 1.00)
 
-    get "/api/v1/invoice_items/find?unit_price=#{invoice_item_1.unit_price}"
+    get "/api/v1/invoice_items/find?unit_price=#{invoice_item_1.unit_price.to_s}"
 
     expect(response).to be_successful
 
     invoice_item_check = JSON.parse(response.body)
     expect(invoice_item_check).to_not eq({"data"=>nil})
     expect(invoice_item_check['data']['type']).to eq('invoice_item')
-    expect(invoice_item_check['data']['attributes']['unit_price']).to eq(invoice_item_1.unit_price)
-    expect(invoice_item_check['data']['attributes']['unit_price']).to_not eq(invoice_item_2.unit_price)
+    expect(invoice_item_check['data']['attributes']['unit_price']).to eq(invoice_item_1.unit_price.to_s)
+    expect(invoice_item_check['data']['attributes']['unit_price']).to_not eq(invoice_item_2.unit_price.to_s)
   end
 
   it "can find a single invoice_item by created_at" do
@@ -228,16 +228,16 @@ describe "Invoice_items API Find Endpoints" do
     invoice_item_2 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice.id, quantity: 5, unit_price: 1.00)
     invoice_item_3 = create(:invoice_item, item_id: item_1.id, invoice_id: invoice.id, quantity: 10, unit_price: 2.50)
 
-    get "/api/v1/invoice_items/find_all?unit_price=#{invoice_item_1.unit_price}"
+    get "/api/v1/invoice_items/find_all?unit_price=#{invoice_item_1.unit_price.to_s}"
 
     expect(response).to be_successful
 
     invoice_item_check = JSON.parse(response.body)
     expect(invoice_item_check).to_not eq({"data"=>nil})
     expect(invoice_item_check['data'].first['type']).to eq('invoice_item')
-    expect(invoice_item_check['data'].first['attributes']['unit_price']).to eq(invoice_item_1.unit_price)
-    expect(invoice_item_check['data'].first['attributes']['unit_price']).to_not eq(invoice_item_2.unit_price)
-    expect(invoice_item_check['data'].last['attributes']['unit_price']).to eq(invoice_item_3.unit_price)
+    expect(invoice_item_check['data'].first['attributes']['unit_price']).to eq(invoice_item_1.unit_price.to_s)
+    expect(invoice_item_check['data'].first['attributes']['unit_price']).to_not eq(invoice_item_2.unit_price.to_s)
+    expect(invoice_item_check['data'].last['attributes']['unit_price']).to eq(invoice_item_3.unit_price.to_s)
   end
 
   it "can find all invoice_items by created_at" do
