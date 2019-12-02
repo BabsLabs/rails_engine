@@ -14,8 +14,6 @@ describe "Transactions API Relationship Endpoints" do
     transaction_check = JSON.parse(response.body)
     expect(transaction_check).to_not eq({"data"=>nil})
     expect(transaction_check).to_not eq({"data"=>[]})
-    expect(transaction_check['data']['type']).to eq('transaction_invoice')
-    expect(transaction_check['data']['relationships']['invoice']['data']['id']).to eq(transaction.invoice_id.to_s)
-    expect(transaction_check['data']['relationships']['invoice']['data']['type']).to eq('invoice')
+    expect(transaction_check['data']['type']).to eq('invoice')
   end
 end

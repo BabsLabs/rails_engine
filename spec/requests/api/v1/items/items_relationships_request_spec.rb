@@ -14,7 +14,7 @@ describe "Items API Relationship Endponts" do
 
     items_invoice_items_check = JSON.parse(response.body)
     expect(items_invoice_items_check).to_not eq({"data"=>nil})
-    expect(items_invoice_items_check['data']['relationships']['invoice_items']['data'].length).to eq(5)
+    expect(items_invoice_items_check['data'].length).to eq(5)
   end
 
   it "returns the associated merchant" do
