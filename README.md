@@ -3,22 +3,17 @@
 ## RailsEngine / RalesEngine
 
 ### Description
-
 The RailsEngine (or RalesEngine as it might have been called had I finished more of the SalesEngine Business Intelligence queries) is a Ruby on Rails powered API that provides sales data for a fictional dataset of sales information.
 
 ### Version
-
 This API is currently versioned as V1 (version 1). All endpoints will be accessed using the `/api/v1/` URI path prefix. More information on paths and use can be found in the Features / Usage section below.
 
 ### Purpose
-
-The API was built to practice restful routing and test driven development with the assistance of FactoryBot and Faker.
+The API was built to practice restful routing and test driven development with the assistance of FactoryBot and Faker. In addition the project focused on advanced ActiveRecord queries for the purpose of Business Intelligence.
 
 ### Screenshots
 
-
 ### Tech / Framework Used
-
 This project was built and tested using the following technologies;
 
 * Ruby on Rails
@@ -69,7 +64,6 @@ end
 `/api/v1/customers/find?first_name=<FIRST-NAME-GOES-HERE>` where <FIRST-NAME-GOES-HERE> is the name you want to query.
 
 ### Code Examples
-
 Controller Example:
 ```
 class Api::V1::CustomersController < ApplicationController
@@ -132,7 +126,6 @@ end
 ```
 
 ### Installation
-
 #### Requirements
 Ruby 2.4 or higher with Rails 5.2.3 or higher.
 
@@ -160,9 +153,7 @@ Step 4 - Run the Rake Import task to get the CSV data transferred to your databa
 Step 5 - Launch your rails server with local host)
 `rails s`
 
-
 ### Testing
-
 The testing is done using RSpec with FactoryBot and Faker to generate test data and with the additional tools of Pry, SimpleCov, and ShouldaMatchers.
 
 All tests can be run using the command `rspec` to run all tests.
