@@ -1,24 +1,159 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## RailsEngine / RalesEngine
 
-Things you may want to cover:
+### Description
+The RailsEngine (or RalesEngine as it might have been called had I finished more of the SalesEngine Business Intelligence queries) is a Ruby on Rails powered API that provides sales data for a fictional dataset of sales information.
 
-* Ruby version
+### Version
+This API is currently versioned as V1 (version 1). All endpoints will be accessed using the `/api/v1/` URI path prefix. More information on paths and use can be found in the Features / Usage section below.
 
-* System dependencies
+### Purpose
+The API was built to practice restful routing and test driven development with the assistance of FactoryBot and Faker. In addition the project focused on advanced ActiveRecord queries for the purpose of Business Intelligence.
 
-* Configuration
+### Screenshots
 
-* Database creation
+### Tech / Framework Used
+This project was built and tested using the following technologies;
 
-* Database initialization
+* Ruby on Rails
+* FastJsonapi
+* RSpec
+* FactoryBot
+* Faker
+* Pry
+* SimpleCov
+* ShouldaMatchers
+* Serializers
 
-* How to run the test suite
+### Features / Usage
+The RailsEngine API data set includes data for the following models;
 
-* Services (job queues, cache servers, search engines, etc.)
+* `customers`
+* `invoice_items`
+* `invoices`
+* `items`
+* `merchants`
+* `transactions`
 
-* Deployment instructions
+Api data can be accessed using the following path formula:
 
-* ...
+`/api/v1/<model>/<id>/<action>?<query parameters>`
+
+ *Note that the <id> and the <action?>=<query parameters> are optional ways to scope the API data. Providing an Id will only show information for that individual model.*
+
+Optional actions for all models are as follows;
+* `find`
+* `find_all`
+* `random`
+* `created_at`
+* `updated_at`
+
+In addition each model has query actions based on that models specific serializer attributes and relationships.
+
+An example of a customer serializer with corresponding API path for the attribute of first_name:
+
+```
+class CustomerSerializer
+  include FastJsonapi::ObjectSerializer
+
+  attributes :id, :first_name, :last_name
+end
+```
+
+`/api/v1/customers/find?first_name=<FIRST-NAME-GOES-HERE>` where <FIRST-NAME-GOES-HERE> is the name you want to query.
+
+### Code Examples
+Controller Example:
+```
+class Api::V1::CustomersController < ApplicationController
+
+  def index
+    customers = Customer.all
+    serialized_customers = CustomerSerializer.new(customers)
+    render json: serialized_customers
+  end
+
+  def show
+    customer = Customer.find(params[:id])
+    serialized_customer = CustomerSerializer.new(customer)
+    render json: serialized_customer
+  end
+
+end
+```
+
+Find Controller Example:
+```
+class Api::V1::Customers::FindController < ApplicationController
+
+  def index
+    customers = Customer.where("#{params.keys.first} = '#{params.values.first}'")
+    serialized_customers = CustomerSerializer.new(customers)
+    render json: serialized_customers
+  end
+
+  def show
+    customer = Customer.find_by("#{params.keys.first} = '#{params.values.first}'")
+    serialized_customer = CustomerSerializer.new(customer)
+    render json: serialized_customer
+  end
+
+end
+```
+
+Random Controller Example:
+```
+class Api::V1::Customers::RandomController < ApplicationController
+
+  def show
+    rand_ids = Customer.pluck(:id).sample
+    customer = Customer.find(rand_ids)
+    serialized_customer = CustomerSerializer.new(customer)
+    render json: serialized_customer
+  end
+
+end
+```
+
+Serializer Example (using FastJsonapi):
+```
+class CustomerSerializer
+  include FastJsonapi::ObjectSerializer
+
+  attributes :id, :first_name, :last_name
+end
+```
+
+### Installation
+#### Requirements
+Ruby 2.4 or higher with Rails 5.2.3 or higher.
+
+#### To Install:
+To get this API running on your machine perform the following steps from your terminal:
+
+Step 1 - Clone the Repository and change into directory)
+```
+git clone git@github.com:BabsLabs/rails_engine.git
+cd rails_engine
+```
+
+Step 2 - Bundle install all required gems)
+`bundle install`
+
+Step 3 - Setup Database)
+```
+rails db:create
+rails db:migrate
+```
+
+Step 4 - Run the Rake Import task to get the CSV data transferred to your database. Note - This may take a few minutes.)
+`rake import`
+
+Step 5 - Launch your rails server with local host)
+`rails s`
+
+### Testing
+The testing is done using RSpec with FactoryBot and Faker to generate test data and with the additional tools of Pry, SimpleCov, and ShouldaMatchers.
+
+All tests can be run using the command `rspec` to run all tests.
