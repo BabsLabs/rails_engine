@@ -174,3 +174,5 @@ Step 5 - Launch your rails server with local host)
 The testing is done using RSpec with FactoryBot and Faker to generate test data and with the additional tools of Pry, SimpleCov, and ShouldaMatchers.
 
 All tests can be run using the command `rspec` to run all tests.
+
+Note* Skipped tests can be unskipped by removing the `skip`.
