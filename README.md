@@ -23,6 +23,12 @@ This project was built and tested using the following technologies;
 * SimpleCov
 * ShouldaMatchers
 * Serializers
+* Active Designer Database Designer
+
+### Database Schema
+<img src="https://raw.githubusercontent.com/BabsLabs/rails_engine/master/lib/img/Screen%20Shot%202019-12-01%20at%2010.08.16%20PM.png"
+     alt="Example Search wih URL"
+     style="float: left; margin-right: 10px;" />
 
 ### Features / Usage
 The RailsEngine API data set includes data for the following models;
