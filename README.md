@@ -11,8 +11,6 @@ This API is currently versioned as V1 (version 1). All endpoints will be accesse
 ### Purpose
 The API was built to practice restful routing and test driven development with the assistance of FactoryBot and Faker. In addition the project focused on advanced ActiveRecord queries for the purpose of Business Intelligence.
 
-### Screenshots
-
 ### Tech / Framework Used
 This project was built and tested using the following technologies;
 
@@ -62,6 +60,11 @@ end
 ```
 
 `/api/v1/customers/find?first_name=<FIRST-NAME-GOES-HERE>` where <FIRST-NAME-GOES-HERE> is the name you want to query.
+
+Example API call with path:
+<img src="https://raw.githubusercontent.com/BabsLabs/rails_engine/master/lib/img/Screen%20Shot%202019-12-01%20at%209.50.51%20PM.png"
+     alt="Example Search wih URL"
+     style="float: left; margin-right: 10px;" />
 
 ### Code Examples
 Controller Example:
