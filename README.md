@@ -119,6 +119,14 @@ class Api::V1::Customers::RandomController < ApplicationController
 end
 ```
 
+Model Example:
+```
+class Customer < ApplicationRecord
+  has_many :invoices
+  has_many :transactions, through: :invoices
+end
+```
+
 Serializer Example (using FastJsonapi):
 ```
 class CustomerSerializer
