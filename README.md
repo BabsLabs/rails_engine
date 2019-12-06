@@ -3,7 +3,7 @@
 ## RailsEngine / RalesEngine
 
 ### Description
-The RailsEngine (or RalesEngine as it might have been called had I finished more of the SalesEngine Business Intelligence queries) is a Ruby on Rails powered API that provides sales data for a fictional dataset of sales information.
+The RailsEngine (or RalesEngine) is a Ruby on Rails powered API that provides sales data for a fictional dataset of sales information.
 
 ### Version
 This API is currently versioned as V1 (version 1). All endpoints will be accessed using the `/api/v1/` URI path prefix. More information on paths and use can be found in the Features / Usage section below.
