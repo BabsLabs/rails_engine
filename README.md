@@ -3,13 +3,13 @@
 ## RailsEngine / RalesEngine
 
 ### Description
-The RailsEngine (or RalesEngine) is a Ruby on Rails powered API that provides sales data for a fictional dataset of sales information.
+The RailsEngine is a Ruby on Rails powered versioned API that provides sales data for a fictional dataset of sales information.
 
 ### Version
-This API is currently versioned as V1 (version 1). All endpoints will be accessed using the `/api/v1/` URI path prefix. More information on paths and use can be found in the Features / Usage section below.
+This API is currently versioned as V1 (version 1). All endpoints will be accessed using the `/api/v1/` URI path prefix. More information on paths, including example paths, and API use can be found in the Features / Usage section below.
 
 ### Purpose
-The API was built to practice restful routing and test driven development with the assistance of FactoryBot and Faker. In addition the project focused on advanced ActiveRecord queries for the purpose of Business Intelligence.
+The API was built to practice restful API routing and test driven development with the assistance of FactoryBot and Faker. Another goal was to practice writing a rake task to parse the provided csv data and import it into a database. In addition the project focused on advanced ActiveRecord queries for the purpose of Business Intelligence and the implementation of serializers to display the provided information.
 
 ### Tech / Framework Used
 This project was built and tested using the following technologies;
@@ -42,7 +42,7 @@ The RailsEngine API data set includes data for the following models;
 
 Api data can be accessed using the following path formula:
 
-`/api/v1/<model>/<id>/<action>?<query parameters>`
+`/api/v1/<model>/<id>/<action>?<query attribute>=<query parameters>`
 
  *Note that the <id> and the <action?>=<query parameters> are optional ways to scope the API data. Providing an Id will only show information for that individual model.*
 
@@ -155,7 +155,7 @@ Ruby 2.4 or higher with Rails 5.2.3 or higher.
 #### To Install:
 To get this API running on your machine perform the following steps from your terminal:
 
-Step 1 - Clone the Repository and change into directory)
+Step 1 - Clone the Repository and change into a directory of your choice)
 ```
 git clone git@github.com:BabsLabs/rails_engine.git
 cd rails_engine
@@ -179,6 +179,9 @@ Step 5 - Launch your rails server with local host)
 ### Testing
 The testing is done using RSpec with FactoryBot and Faker to generate test data and with the additional tools of Pry, SimpleCov, and ShouldaMatchers.
 
-All tests can be run using the command `rspec` to run all tests.
+All tests can be run using the command `rspec` and individual tests can be run with the `rspec <path>` format.
 
 Note* Skipped tests can be unskipped by removing the `skip`.
+
+### Cost / Authorization
+This is a free and public API. No api key is needed to access this dataset.
